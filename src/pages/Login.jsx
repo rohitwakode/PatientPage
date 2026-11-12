@@ -7,10 +7,11 @@ import BrandMark from '../components/BrandMark'
 import { getApiErrorMessage } from '../context/apiErrors'
 
 const Login = () => {
-  const [isSignUp, setIsSignUp] = useState(true)
+  const [isSignUp, setIsSignUp] = useState(false)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [otp, setOtp] = useState('')
   const [resetToken, setResetToken] = useState('')
   const [forgotStep, setForgotStep] = useState('email')
@@ -115,7 +116,7 @@ const Login = () => {
   const inputClass = 'mt-2 w-full rounded-xl border border-[#dfe8d9] bg-white px-4 py-3 text-[#1f1f1f] outline-none transition placeholder:text-[#6b7280] focus:border-[#58cc02]'
 
   return (
-    <main className="apple-auth flex min-h-[calc(100svh-64px)] items-center justify-center px-5 py-12">
+    <main className="apple-auth flex min-h-screen items-center justify-center px-5 py-12">
       <section className="grid w-full max-w-5xl overflow-hidden rounded-[1.75rem] border border-[#dfe8d9] bg-white shadow-[0_24px_52px_rgba(88,204,2,0.12)] md:grid-cols-[1fr_0.9fr]">
         <div className="relative flex flex-col justify-center overflow-hidden bg-gradient-to-br from-[#f4faf1] via-white to-[#f7fbf6] p-8 md:p-12">
           <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full border border-[#58cc02]/10" />
@@ -164,7 +165,18 @@ const Login = () => {
             )}
             {(!isForgotPassword || forgotStep === 'password') && (
               <label className="block text-sm text-[#374151]">{isForgotPassword ? 'New password' : 'Password'}
-                <input required type="password" value={password} onChange={(event) => setPassword(event.target.value)} className={inputClass} autoComplete={isForgotPassword || isSignUp ? 'new-password' : 'current-password'} />
+                <div className="relative">
+                  <input required type={showPassword ? 'text' : 'password'} value={password} onChange={(event) => setPassword(event.target.value)} className={`${inputClass} pr-16`} autoComplete={isForgotPassword || isSignUp ? 'new-password' : 'current-password'} />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((visible) => !visible)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    aria-pressed={showPassword}
+                    className="absolute right-4 top-[calc(50%+4px)] -translate-y-1/2 text-sm font-semibold text-[#46a300] transition hover:text-[#3aa100]"
+                  >
+                    {showPassword ? 'Hide' : 'Show'}
+                  </button>
+                </div>
               </label>
             )}
             <button disabled={isSubmitting} type="submit" className="w-full rounded-full bg-[#58cc02] px-5 py-3.5 font-black uppercase tracking-[0.08em] text-white shadow-lg shadow-[#58cc02]/20 transition hover:bg-[#46a300] disabled:cursor-wait disabled:opacity-60">

@@ -77,11 +77,11 @@ const Notifications = ({ theme }) => {
       minHeight: 0,
       marginBottom: 10,
       padding: 12,
-      border: `1px solid ${isDark ? '#3b4438' : '#e5e7eb'}`,
-      borderRadius: 4,
-      background: isDark ? '#20251f' : '#fff',
-      color: isDark ? '#cbd5e1' : '#64748b',
-      boxShadow: isDark ? '0 8px 20px rgba(0, 0, 0, 0.3)' : '0 8px 20px rgba(15, 23, 42, 0.08)',
+      border: `1px solid ${isDark ? '#38383a' : '#d2d2d7'}`,
+      borderRadius: 16,
+      background: isDark ? '#1c1c1e' : '#fff',
+      color: isDark ? '#f5f5f7' : '#1d1d1f',
+      boxShadow: isDark ? '0 12px 32px rgba(0, 0, 0, 0.3)' : '0 12px 32px rgba(29, 29, 31, 0.1)',
       fontFamily: "'Inter', 'Segoe UI', sans-serif"
     }}
     bodyStyle={{

@@ -96,10 +96,12 @@ ErrorBoundary.propTypes = {
 }
 
 const App = () => {
+  const { pathname } = useLocation()
   const [theme, setTheme] = useState(() => {
     const storedTheme = localStorage.getItem('theme')
     return storedTheme || 'light'
   })
+  const isLoginPage = pathname === '/login'
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark')
@@ -116,7 +118,7 @@ const App = () => {
       <div id="top" className={`min-h-screen bg-white text-[#1d1d1f] ${theme === 'dark' ? 'dark' : ''}`}>
         <ScrollToTop />
         <Notifications theme={theme} />
-        <Navbar theme={theme} onToggleTheme={toggleTheme} />
+        {!isLoginPage && <Navbar theme={theme} onToggleTheme={toggleTheme} />}
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route element={<RequireAuth />}>
@@ -131,7 +133,7 @@ const App = () => {
             <Route path='*' element={<NotFound />} />
           </Route>
         </Routes>
-        <Footer />
+        {!isLoginPage && <Footer />}
       </div>
     </ErrorBoundary>
   )
