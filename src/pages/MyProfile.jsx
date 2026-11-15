@@ -87,10 +87,19 @@ const MyProfile = () => {
   return (
     <main className="page-container text-[#1f1f1f]">
       <header className="mb-9 flex flex-wrap items-end justify-between gap-5">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#46a300]">Your account</p>
-          <h1 className="mt-3 text-4xl font-black tracking-tight md:text-5xl">{userData.name}</h1>
-          <p className="mt-2 text-[#4b5563]">{userData.email}</p>
+        <div className="flex items-center gap-5">
+          {userData.image && (
+            <img
+              src={userData.image}
+              alt={`${userData.name}'s profile`}
+              className="h-20 w-20 rounded-full border border-[#dfe8d9] object-cover"
+            />
+          )}
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#46a300]">Your account</p>
+            <h1 className="mt-3 text-4xl font-black tracking-tight md:text-5xl">{userData.name}</h1>
+            <p className="mt-2 text-[#4b5563]">{userData.email}</p>
+          </div>
         </div>
         {!isEdit && <button onClick={() => setIsEdit(true)} className="rounded-xl border border-[#dfe8d9] bg-[#f5faf3] px-5 py-3 font-semibold transition hover:border-[#dfe8d9] hover:bg-[#f5faf3]">Edit profile</button>}
       </header>
